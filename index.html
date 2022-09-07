@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PyScript Sample</title>
+        <title>バックトラックシミュレーター(仮)</title>
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
 
         <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
         <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+        <py-env>
+            - numpy
+        </py-env>
     </head>
     <body>
         <div>
-            This statement below was computed in Python:
         <py-script>
-            print('Hello! PyScript!!')
+            from numpy import poly1d as poly
+            number_of_dices = 2
+            number_of_faces = 2
+            sum_of_eyes = 4
+            
+            dice = range(number_of_faces+1)
+            prob = [1/number_of_faces]*number_of_faces+[0]
+            f = poly(prob)
+            f = f ** number_of_dices
+            p = f.c[::-1]
+            answer = sum(p[sum_of_eyes:])
+            print('%dD%dにおいて%d以上の出目が出る確率は%f'% (number_of_dices, number_of_faces, sum_of_eyes, answer))
         </py-script>
         </div>
-        <br>
-        <div>
-            You can write and execute Python Codes in below box.
-            <py-repl/>
-        </div>
-        <br>
-        <div>created by <a href="https://thilog.com">thiroyoshi</a></div>
+        <div>created by Deathsword</div>
     </body>
 </html>
